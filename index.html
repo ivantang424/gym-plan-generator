@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <title>健身紀錄生成器</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    textarea { width: 100%; height: 200px; margin-top: 10px; }
+    label, select, input { margin: 5px 0; display: block; }
+    button { margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>健身紀錄生成器</h2>
+
+  <label for="exercise">選擇動作：</label>
+  <select id="exercise">
+    <option>Bench press</option>
+    <option>Incline Bench press</option>
+    <option>Back extension</option>
+    <option>Biceps curl</option>
+    <option>Tricep pushdown</option>
+  </select>
+
+  <label for="sets">組數（sets）：</label>
+  <input type="number" id="sets" value="4" min="1">
+
+  <label for="reps">次數（reps）：</label>
+  <input type="number" id="reps" value="10" min="1">
+
+  <label for="weight">重量（kg）：</label>
+  <input type="number" id="weight" value="20" step="0.5" min="0">
+
+  <button onclick="addExercise()">加入動作</button>
+  <button onclick="clearText()">清除全部</button>
+  <button onclick="copyToClipboard()">複製內容</button>
+
+  <textarea id="output" placeholder="這裡會顯示你的健身紀錄..."></textarea>
+
+  <script>
+    function addExercise() {
+      const exercise = document.getElementById("exercise").value;
+      const sets = document.getElementById("sets").value;
+      const reps = document.getElementById("reps").value;
+      const weight = document.getElementById("weight").value;
+
+      const line = `${exercise}\n- ${sets} sets × ${reps} reps @ ${weight}kg\n\n`;
+      document.getElementById("output").value += line;
+    }
+
+    function clearText() {
+      document.getElementById("output").value = "";
+    }
+
+    function copyToClipboard() {
+        const textArea = document.getElementById("output");
+        textArea.select();
+        document.execCommand("copy");
+        alert("已複製到剪貼簿！");
+    }
+
+  </script>
+
+</body>
+</html>
